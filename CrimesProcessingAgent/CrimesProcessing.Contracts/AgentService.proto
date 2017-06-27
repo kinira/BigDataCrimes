@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+
+package crimesProcessing.Contracts;
+
+
+service CrimesService {
+  rpc SayHello (CrimesRequest) returns (CrimesResponse);
+}
+
+message CrimesRequest {
+  string message = 1;
+}
+
+message CrimesResponse {
+  string result = 1;
+}

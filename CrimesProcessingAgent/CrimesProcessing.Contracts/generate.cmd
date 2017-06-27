@@ -1,0 +1,1 @@
+﻿%userprofile%\.nuget\packages\grpc.tools\1.2.2\tools\windows_x64\protoc.exe -I ./ --csharp_out Generated --grpc_out Generated ./AgentService.proto --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\grpc.tools\1.2.2\tools\windows_x64\grpc_csharp_plugin.exe
