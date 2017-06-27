@@ -1,19 +1,9 @@
-﻿using CrimesProcessing.Contracts;
-using Grpc.Core;
+﻿using Grpc.Core;
 using System;
 using static CrimesProcessing.Contracts.CrimesService;
-using System.Threading.Tasks;
 
 namespace CrimesProcessingAgent
 {
-    public class Service : CrimesServiceBase
-    {
-        public override Task<CrimesResponse> SayHello(CrimesRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new CrimesResponse { Result = "some data" });
-        }
-    }
-
     public static class Program
     {
         public const int Port = 50051;
