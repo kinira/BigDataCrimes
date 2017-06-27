@@ -1,0 +1,6 @@
+D:\Krisi\ФМИ\BigData\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.deps.json
+D:\Krisi\ФМИ\BigData\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.runtimeconfig.json
+D:\Krisi\ФМИ\BigData\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.runtimeconfig.dev.json
+D:\Krisi\ФМИ\BigData\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.dll
+D:\Krisi\ФМИ\BigData\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.csprojResolveAssemblyReference.cache
+D:\Krisi\ФМИ\BigData\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.AssemblyInfo.cs
