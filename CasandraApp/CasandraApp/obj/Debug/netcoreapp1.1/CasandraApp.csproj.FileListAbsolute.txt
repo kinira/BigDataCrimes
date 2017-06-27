@@ -13,3 +13,12 @@ D:\Krisi\ФМИ\BigDataCrimes\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\Ca
 D:\Krisi\ФМИ\BigDataCrimes\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.AssemblyInfo.cs
 D:\Krisi\ФМИ\BigDataCrimes\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.dll
 D:\Krisi\ФМИ\BigDataCrimes\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.pdb
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.deps.json
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.runtimeconfig.json
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.runtimeconfig.dev.json
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.dll
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\bin\Debug\netcoreapp1.1\CasandraApp.pdb
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.AssemblyInfo.cs
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.dll
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.pdb
+D:\D\ФМИ\BigData\CrimesProject\CasandraApp\CasandraApp\obj\Debug\netcoreapp1.1\CasandraApp.csprojResolveAssemblyReference.cache

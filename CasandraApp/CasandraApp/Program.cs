@@ -6,7 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Cassandra.Mapping;
-
+using Cassandra.Data.Linq;
+using CasandraApp.Extensions;
 
 namespace CasandraApp
 {
@@ -14,36 +15,37 @@ namespace CasandraApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Start insert into Cassndra db");
+            Console.WriteLine("Start insert into Cassandra db");
             ISession session = SetUpCassandra();
 
             CreateCrimeTableIfNotExists(session);
-            
+
             var httpClient = new HttpClient();
-            var limitParam = "&$limit=5000";
-            var uriParams = "year=2001";
-            var uri = $"https://data.cityofchicago.org/resource/6zsd-86xi.json?{uriParams}{limitParam}";
-            httpClient.BaseAddress = new Uri(uri);
 
-            List<CrimesJson> allCrimes;
 
-            using (HttpResponseMessage response = httpClient.GetAsync(uri).Result)
+            for (int i = 2001; i <= 2017; i++)
             {
-                using (HttpContent content = response.Content)
-                {
-                    var json = content.ReadAsStringAsync().Result;
-                    allCrimes = JsonConvert.DeserializeObject<List<CrimesJson>>(json);
-                }
+                List<CrimesJson> allCrimes = DownloadCrimes(httpClient, i);
+                InsertCrimes(session, allCrimes);
             }
-            
-            Console.WriteLine("Uspeh");
+
+
+
+            Console.WriteLine();
+        }
+
+
+        private static void InsertCrimes(ISession session, IEnumerable<CrimesJson> allCrimes)
+        {
             IMapper mapper = new Mapper(session);
 
+
             var mapptoCraimsDb = allCrimes.Select(x =>
-            new Crimes() {
+            new Crimes()
+            {
                 Block = x.Block,
                 CaseNumber = x.CaseNumber,
-                CrimeDate = new LocalDate(x.Date.Year, x.Date.Month,x.Date.Day),
+                CrimeDate = new LocalDate(x.Date.Year, x.Date.Month, x.Date.Day),
                 District = x.District,
                 Hour = x.Date.Hour,
                 Minute = x.Date.Minute,
@@ -55,19 +57,41 @@ namespace CasandraApp
                 Updated_On = new LocalDate(x.Updated_On.Year, x.Updated_On.Month, x.Updated_On.Day),
                 X_Coordinate = x.X_Coordinate,
                 Year = x.Year,
-                Y_Coordinate = x.Y_Coordinate});    
+                Y_Coordinate = x.Y_Coordinate
+            });
 
-            foreach (var crime in mapptoCraimsDb)
+            var batchesForInsert = mapptoCraimsDb.Batch(100);
+
+            foreach (var crimesBatch in batchesForInsert)
             {
-                mapper.Insert(crime);
-                Console.WriteLine("Entry inserted");
+                var batch = mapper.CreateBatch(BatchType.Unlogged);
+
+                foreach (var crime in crimesBatch)
+                    batch.Insert(crime);
+
+                mapper.ExecuteAsync(batch).Wait();
+                Console.WriteLine("Batch inserted");
+            }
+        }
+
+        private static List<CrimesJson> DownloadCrimes(HttpClient httpClient, int year)
+        {
+            var limitParam = "$limit=65000";
+            var uriParams = $"year={year}";
+            var apitoken = $"$$app_token=cvJt8qTg2K2iQ0OfYmoH4vsgx";
+            var uri = $"https://data.cityofchicago.org/resource/6zsd-86xi.json?{uriParams}&{limitParam}&{apitoken}";
+
+            List<CrimesJson> allCrimes;
+            using (HttpResponseMessage response = httpClient.GetAsync(uri).Result)
+            {
+                using (HttpContent content = response.Content)
+                {
+                    var json = content.ReadAsStringAsync().Result;
+                    allCrimes = JsonConvert.DeserializeObject<List<CrimesJson>>(json);
+                }
             }
 
-            Console.WriteLine("test");
-
-            //session.Execute("insert into users (lastname, age, city, email, firstname) values ('Jones', 35, 'Austin', 'bob@example.com', 'Bob')");
-            //Row result = session.Execute("select * from users where lastname='Jones'").First();
-            //Console.WriteLine("{0} {1}", result["firstname"], result["age"]);
+            return allCrimes;
         }
 
         private static void CreateCrimeTableIfNotExists(ISession session)
