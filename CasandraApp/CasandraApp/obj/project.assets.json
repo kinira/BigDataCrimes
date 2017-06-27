@@ -7727,10 +7727,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Krisi\\ФМИ\\BigDataCrimes\\CasandraApp\\CasandraApp\\CasandraApp.csproj",
+      "projectUniqueName": "D:\\D\\ФМИ\\BigData\\CrimesProject\\CasandraApp\\CasandraApp\\CasandraApp.csproj",
       "projectName": "CasandraApp",
-      "projectPath": "D:\\Krisi\\ФМИ\\BigDataCrimes\\CasandraApp\\CasandraApp\\CasandraApp.csproj",
-      "outputPath": "D:\\Krisi\\ФМИ\\BigDataCrimes\\CasandraApp\\CasandraApp\\obj\\",
+      "projectPath": "D:\\D\\ФМИ\\BigData\\CrimesProject\\CasandraApp\\CasandraApp\\CasandraApp.csproj",
+      "outputPath": "D:\\D\\ФМИ\\BigData\\CrimesProject\\CasandraApp\\CasandraApp\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
