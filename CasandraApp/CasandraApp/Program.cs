@@ -1,13 +1,12 @@
-﻿using Cassandra;
+﻿using CasandraApp.Extensions;
+using Cassandra;
+using Cassandra.Data.Linq;
+using Cassandra.Mapping;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using Cassandra.Mapping;
-using Cassandra.Data.Linq;
-using CasandraApp.Extensions;
 
 namespace CasandraApp
 {
@@ -18,18 +17,19 @@ namespace CasandraApp
             Console.WriteLine("Start insert into Cassandra db");
             ISession session = SetUpCassandra();
 
-            CreateCrimeTableIfNotExists(session);
+            //CreateCrimeTableIfNotExists(session);
 
             var httpClient = new HttpClient();
 
 
-            for (int i = 2001; i <= 2017; i++)
-            {
-                List<CrimesJson> allCrimes = DownloadCrimes(httpClient, i);
-                InsertCrimes(session, allCrimes);
-            }
+            //for (int i = 2001; i <= 2017; i++)
+            //{
+            //    List<CrimesJson> allCrimes = DownloadCrimes(httpClient, i);
+            //    InsertCrimes(session, allCrimes);
+            //}
 
 
+            session.Execute("DROP INDEX crimes_year");
 
             Console.WriteLine();
         }
@@ -96,7 +96,7 @@ namespace CasandraApp
 
         private static void CreateCrimeTableIfNotExists(ISession session)
         {
-            session.Execute("DROP TABLE crimes");
+            //session.Execute("DROP TABLE crimes");
             session.Execute(@"
                     CREATE TABLE IF NOT EXISTS crimes(
                             id int PRIMARY KEY,
@@ -117,7 +117,7 @@ namespace CasandraApp
                             )");
         }
 
-        private static ISession SetUpCassandra()
+        public static ISession SetUpCassandra()
         {
             Cluster cluster = Cluster.Builder()
                 .AddContactPoints("35.158.163.178", "35.158.217.185", "35.158.151.241")
