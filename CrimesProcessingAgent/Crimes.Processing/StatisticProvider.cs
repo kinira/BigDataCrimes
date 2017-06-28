@@ -151,20 +151,22 @@ namespace Crimes.Processing
         public async Task<IEnumerable<CaseSimple>> CalculateAllCrimesByDistrctsByYear(int year)
         {
             var task = await dbProvider.ReadCrimesByYear(session, year);
-            var res = task.Select(x => new CaseSimple() { Year = x.Year, Type = x.PrimaryType, X = x.X_Coordinate, Y = x.Y_Coordinate, Month = x.CrimeDate.Month });
+            var res = task.Select(CaseSimple.FromDbModel);
             return res;
         }
 
         public async Task<IEnumerable<CaseSimple>> GetCrimesOneMonthBack()
         {
+            var localMonthBack = new LocalDate(DateTime.Now.Year, DateTime.Now.Month - 1, DateTime.Now.Day);
+
             var task = await dbProvider.ReadCrimesByYear(session, DateTime.Now.Year);
-            var res = task.Where(x => x.CrimeDate.Month == DateTime.Now.AddMonths(-1).Month);
-            return res.Select(x => new CaseSimple() { Year = x.Year, Type = x.PrimaryType, X = x.X_Coordinate, Y = x.Y_Coordinate, Month = x.CrimeDate.Month });
+            var res = task.Where(x => x.CrimeDate > localMonthBack);
+            return res.Select(CaseSimple.FromDbModel);
         }
 
         public void Dispose()
         {
-            //this.session.Dispose();
+            this.session.Dispose();
         }
     }
 }

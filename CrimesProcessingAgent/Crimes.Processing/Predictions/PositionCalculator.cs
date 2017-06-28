@@ -1,4 +1,5 @@
-﻿using Crimes.Processing.Predictions;
+﻿using Crimes.Processing.Models;
+using Crimes.Processing.Predictions;
 using CrimesProcessing.Contracts;
 using CrimesWebApi.ServiceModel;
 using System;
@@ -14,9 +15,11 @@ namespace Crimes.Processing.Predictions
 
         public double Y { get; set; }
 
-        public double Year { get; set; }
+        public int Year { get; set; }
 
-        public double Month { get; set; }
+        public int Month { get; set; }
+
+        public int Date { get; set; }
 
         public string Type { get; set; }
 
@@ -24,23 +27,40 @@ namespace Crimes.Processing.Predictions
         {
             var dX = (this.X - other.X) * (this.X - other.X);
             var dY = (this.Y - other.Y) * (this.Y - other.Y);
-            var dMonth = (this.Month - other.Month) * (this.Month - other.Month);
+            var dMonth = (double)(this.Month - other.Month) * (this.Month - other.Month);
 
             return Math.Sqrt(dX + dY + dMonth);
         }
-
 
         public static CaseSimple FromAgentRequest(CalculatePredictionRequest request)
          => new CaseSimple
          {
              X = request.X,
              Y = request.Y,
-             Year = DateTime.Now.Year,
-             Month = DateTime.Now.Month
+             Year = request.Year,
+             Month = request.Month
          };
 
         public static CaseSimple FromApiRequest(PredictionRequest request)
-          => new CaseSimple { X = request.X_coordinate, Y = request.Y_coordinate, Month = request.Month, Year = DateTime.Now.Year };
+          => new CaseSimple
+          {
+              X = request.X_coordinate,
+              Y = request.Y_coordinate,
+              Month = request.Month,
+              Date = request.Date,
+              Year = DateTime.Now.Year
+          };
+
+        public static CaseSimple FromDbModel(CrimesDb model)
+          => new CaseSimple()
+          {
+              Year = model.Year,
+              Type = model.PrimaryType,
+              X = model.X_Coordinate,
+              Y = model.Y_Coordinate,
+              Month = model.CrimeDate.Month,
+              Date = model.CrimeDate.Day
+          };
     }
 
 }
@@ -59,7 +79,18 @@ public class PositionCalculator
                     0.05
             };
 
-        return Enumerable.Range(0, 5).Sum(i => coefficients[i] * yearlyAverages[currentYear - i]);
+        var len = Math.Min(coefficients.Length, yearlyAverages.Count);
+
+        return Enumerable.Range(0, len).Sum(i => coefficients[i] * yearlyAverages[currentYear - i]);
+    }
+
+    public int FindDaysSinceLastCrime(CaseSimple given, IEnumerable<CaseSimple> lastMonthData)
+    {
+        var lastCase = lastMonthData.OrderBy(item => item.DistanceTo(given)).FirstOrDefault();
+        if (lastCase == null) return 30;
+
+        var time = new DateTime(given.Year, given.Month, given.Date) - new DateTime(lastCase.Year, lastCase.Month, lastCase.Date);
+        return time.Days;
     }
 
 

@@ -3,6 +3,7 @@ using Crimes.Processing.Predictions;
 using CrimesProcessing.Contracts;
 using Grpc.Core;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using static CrimesProcessing.Contracts.CrimesService;
 
@@ -21,7 +22,8 @@ namespace CrimesProcessingAgent
         }
 
         public override async Task CalculateCrimes(CalculateAvgRequest request, IServerStreamWriter<CalculateAvgResponse> responseStream, ServerCallContext context)
-        {       
+        {
+            Console.WriteLine("Calculate average request recieved");
             var data = await this.statisticProvider.CalculateAllCrimesInDisctrictsByYear(request.Year);
 
             foreach (var item in data)
@@ -31,12 +33,11 @@ namespace CrimesProcessingAgent
 
         public override async Task<CalculatePredictionResponse> GetProbability(CalculatePredictionRequest request, ServerCallContext context)
         {
-            var calc = new PositionCalculator();
+            Console.WriteLine("GetProbability average request recieved");
+
             var dbData = await statisticProvider.CalculateAllCrimesByDistrctsByYear(request.Year);
 
-            var res = calc.CalculateAverageCrimes(new CaseSimple { X = request.X,
-                                                          Y = request.Y,
-                                                            Year = DateTime.Now.Year, Month = DateTime.Now.Month },dbData);
+            var res = posCalculator.CalculateAverageCrimes(CaseSimple.FromAgentRequest(request), dbData);
             return new CalculatePredictionResponse() { Probability = res };
         }
 

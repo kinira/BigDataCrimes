@@ -36,23 +36,15 @@ namespace CrimesWebApi
             var tasks = new Dictionary<int, AsyncUnaryCall<CalculatePredictionResponse>>();
             var yearAverages = new Dictionary<int, double>();
 
-            for (int i = year; i >= year - 4; i--)
-            {
-                tasks.Add(i, agents[i % agents.Count].GetProbabilityAsync(new CalculatePredictionRequest
-                {
-                    Month = request.Month,
-                    X = request.X_coordinate,
-                    Y = request.Y_coordinate,
-                    Year = i
-                }));
-            }
+            for (int y = year; y >= year -4 ; y--)
+                tasks.Add(y, agents[y % agents.Count].GetProbabilityAsync(request.ToAgentRequest(y)));
 
             foreach (var task in tasks)
                 yearAverages.Add(task.Key, (await task.Value).Probability);
 
             var expectation = calculator.GetAverageOfPreviousYears(yearAverages);
             var recentCrimes = await statisticProvider.GetCrimesOneMonthBack();
-            var lastMonthData = calculator.CalculateAverageCrimes(CaseSimple.FromApiRequest(request), recentCrimes);
+            var lastMonthData = calculator.FindDaysSinceLastCrime(CaseSimple.FromApiRequest(request), recentCrimes);
             var probability = calculator.CalculateCrimeProbability(expectation, lastMonthData);
 
             return new PredictionResponse { Probability = probability };

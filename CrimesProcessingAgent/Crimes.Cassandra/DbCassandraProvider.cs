@@ -115,10 +115,11 @@ namespace Crimes.Processing
 
         public async Task<IEnumerable<CrimesDb>> ReadCrimesByYear(ISession session, int year)
         {
-            var rowDbData = await session.ExecuteAsync(new SimpleStatement($"select * from crimes where \"year\"={year} Allow Filtering"));
-            var readedData = MappedToCrimes(rowDbData);
+            var statement = new SimpleStatement($"select * from crimes where \"year\"={year} Allow Filtering");
+            statement.SetPageSize(1000);
 
-            return readedData;
+            var rowDbData = await session.ExecuteAsync(statement);
+            return MappedToCrimes(rowDbData);
         }
     }
 }
