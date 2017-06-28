@@ -17,21 +17,15 @@ namespace ReadData
 
             var allCrimesByDistricts = CalculateAllCrimesByDistrcts(allCrimesByYears);
 
-            var builder = new StringBuilder();
+            DisplayCrimesByDistricts(allCrimesByDistricts);
 
-            foreach (var yearCrimes in allCrimesByDistricts)
-            {
-                var displayYear = $"For year {yearCrimes.Key} the all crimes in all districts are:";
-                Console.WriteLine(displayYear);
-                builder.AppendLine(displayYear);
-                foreach (var item in yearCrimes.Value)
-                {
-                    var displaycrimes = $"District: {item.Key.Item1} - Crime type: {item.Key.Item2}, total crimes: {item.Value}";
-                    Console.WriteLine(displaycrimes);
-                    builder.AppendLine(displaycrimes);
-                }
-            }
+            CalculateDistrictScores(allCrimesByDistricts);
 
+            Console.WriteLine("End");
+        }
+
+        private static void CalculateDistrictScores(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
+        {
             foreach (var yearCrimes in allCrimesByDistricts)
             {
                 Console.WriteLine($"Statistcs for year {yearCrimes.Key}");
@@ -58,14 +52,24 @@ namespace ReadData
                 }
                 var maxScore = districtSavety.Values.Max();
                 var minScore = districtSavety.Values.Min();
-                Console.WriteLine($"The best district in Chicago for {yearCrimes.Key} is: {districtSavety.First(x=>x.Value == minScore).Key}");
+                Console.WriteLine($"The best district in Chicago for {yearCrimes.Key} is: {districtSavety.First(x => x.Value == minScore).Key}");
                 Console.WriteLine($"The worst district in Chicago for {yearCrimes.Key} is: {districtSavety.First(x => x.Value == maxScore).Key}");
 
             }
+        }
 
-
-
-            Console.WriteLine("End");
+        private static void DisplayCrimesByDistricts(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
+        {
+            foreach (var yearCrimes in allCrimesByDistricts)
+            {
+                var displayYear = $"For year {yearCrimes.Key} the all crimes in all districts are:";
+                Console.WriteLine(displayYear);
+                foreach (var item in yearCrimes.Value)
+                {
+                    var displaycrimes = $"District: {item.Key.Item1} - Crime type: {item.Key.Item2}, total crimes: {item.Value}";
+                    Console.WriteLine(displaycrimes);
+                }
+            }
         }
 
         private static Dictionary<int, Dictionary<Tuple<int, string>, int>> CalculateAllCrimesByDistrcts(Dictionary<int, IEnumerable<Crimes>> allCrimesByYears)

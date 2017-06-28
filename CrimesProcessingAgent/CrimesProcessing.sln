@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrimesProcessingAgent", "CrimesProcessingAgent\CrimesProcessingAgent.csproj", "{4DD09589-AE9C-48E0-B19B-079A6CB9E6EE}"
 EndProject
@@ -16,6 +16,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchestration", "Orchestration", "{2B4E155F-A9FD-4EDA-ADD0-B495F70E5A16}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrimesWebApi.ServiceModel", "CrimesWebApi.ServiceModel\CrimesWebApi.ServiceModel.csproj", "{7C1FA098-3780-45F0-B348-FA2A7C4C4BB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{89A9AB6E-1B60-4EB6-8DA8-E098E2C422CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crimes.Cassandra", "Crimes.Cassandra\Crimes.Cassandra.csproj", "{32DE0718-AC70-40A1-BD0D-B7B3E73047D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Processing", "Processing", "{EEA418EB-9E66-410F-8F09-20F55E1BDB48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crimes.Processing", "Crimes.Processing\Crimes.Processing.csproj", "{72D8C0B3-CB97-4CAD-88C9-3701C246B60C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crimes.DataModel", "Crimes.DataModel\Crimes.DataModel.csproj", "{C4835FDE-959A-487E-A9D7-3DB3A74B21DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +53,18 @@ Global
 		{7C1FA098-3780-45F0-B348-FA2A7C4C4BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C1FA098-3780-45F0-B348-FA2A7C4C4BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C1FA098-3780-45F0-B348-FA2A7C4C4BB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32DE0718-AC70-40A1-BD0D-B7B3E73047D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32DE0718-AC70-40A1-BD0D-B7B3E73047D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32DE0718-AC70-40A1-BD0D-B7B3E73047D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32DE0718-AC70-40A1-BD0D-B7B3E73047D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D8C0B3-CB97-4CAD-88C9-3701C246B60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D8C0B3-CB97-4CAD-88C9-3701C246B60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D8C0B3-CB97-4CAD-88C9-3701C246B60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D8C0B3-CB97-4CAD-88C9-3701C246B60C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4835FDE-959A-487E-A9D7-3DB3A74B21DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4835FDE-959A-487E-A9D7-3DB3A74B21DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4835FDE-959A-487E-A9D7-3DB3A74B21DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4835FDE-959A-487E-A9D7-3DB3A74B21DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +75,8 @@ Global
 		{939CA18A-A23F-4B7B-9FA8-E90665192071} = {A7898AEF-14A2-46D5-8B57-DEE1E560F6CE}
 		{FCE659EC-FA5F-4435-B410-00D9C506C7A6} = {2B4E155F-A9FD-4EDA-ADD0-B495F70E5A16}
 		{7C1FA098-3780-45F0-B348-FA2A7C4C4BB8} = {2B4E155F-A9FD-4EDA-ADD0-B495F70E5A16}
+		{32DE0718-AC70-40A1-BD0D-B7B3E73047D1} = {89A9AB6E-1B60-4EB6-8DA8-E098E2C422CF}
+		{72D8C0B3-CB97-4CAD-88C9-3701C246B60C} = {EEA418EB-9E66-410F-8F09-20F55E1BDB48}
+		{C4835FDE-959A-487E-A9D7-3DB3A74B21DE} = {89A9AB6E-1B60-4EB6-8DA8-E098E2C422CF}
 	EndGlobalSection
 EndGlobal
