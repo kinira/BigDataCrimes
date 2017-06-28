@@ -17,6 +17,7 @@
     <PackageReference Include="ServiceStack.Text.Core" Version="1.0.43" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CrimesProcessing.Contracts\CrimesProcessing.Contracts.csproj" />
     <ProjectReference Include="..\CrimesWebApi.ServiceModel\CrimesWebApi.ServiceModel.csproj" />
   </ItemGroup>
 
