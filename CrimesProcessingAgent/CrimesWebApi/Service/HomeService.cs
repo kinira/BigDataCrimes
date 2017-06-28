@@ -6,27 +6,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static CrimesProcessing.Contracts.CrimesService;
+using Crimes.Processing.Predictions;
 
 namespace CrimesWebApi
 {
     public class HomeService : Service
     {
-        private CrimesService.CrimesServiceClient agent1;
+        private IReadOnlyList<CrimesServiceClient> agents;
+        private PositionCalculator calculator;
 
-        public HomeService()
+        public HomeService(IReadOnlyList<CrimesServiceClient> agents, PositionCalculator calculator)
         {
-            var channel1 = new Channel($"127.0.0.1:50051", ChannelCredentials.Insecure);
-            agent1 = new CrimesService.CrimesServiceClient(channel1);
+            this.agents = agents;
+            this.calculator = calculator;
         }
 
         public object Any(HelloRequest request)
         {
-            return new HelloResponse { Result = $"Hello {request.Name}"};
+            return new HelloResponse { Result = $"Hello {request.Name}" };
         }
 
         public async Task<PredictionResponse> Post(PredictionRequest request)
         {
-            await agent1.GetProbabilityAsync(new CalculatePredictionRequest { Date = request.Date.ToString(), Xcoordinates = request.X_coordinate.ToString(), Ycoordinates = request.Y_coordinate.ToString() });
+            var year = DateTime.Now.Year;
+            var tasks = new Dictionary<int, AsyncUnaryCall<CalculatePredictionResponse>>();
+            var yearAverages = new Dictionary<int , double>();
+
+            for (int i = year; i >= year - 4; i--)
+            {
+                tasks.Add(i, agents[i % agents.Count].GetProbabilityAsync(new CalculatePredictionRequest
+                {
+                    Month = request.Month,
+                    X = request.X_coordinate,
+                    Y = request.Y_coordinate,
+                    Year = year
+                }));
+            }
+
+            foreach (var task in tasks)
+                yearAverages.Add(task.Key, (await task.Value).Probability);
+
+            var expectation = calculator.GetAverageOfPreviousYears(yearAverages);
+
+
+            return new PredictionResponse();
         }
 
     }

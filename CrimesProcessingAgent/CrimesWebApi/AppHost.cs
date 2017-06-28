@@ -1,8 +1,12 @@
-﻿using Funq;
+﻿using Crimes.Processing.Predictions;
+using Funq;
+using Grpc.Core;
 using ServiceStack;
 using ServiceStack.Configuration;
 using ServiceStack.Redis;
+using System.Collections.Generic;
 using System.IO;
+using static CrimesProcessing.Contracts.CrimesService;
 
 namespace CrimesWebApi
 {
@@ -24,6 +28,30 @@ namespace CrimesWebApi
         {
             container.Register<IRedisClientsManager>(c =>
                 new RedisManagerPool(AppSettings.Get("REDIS_HOST", defaultValue: "localhost")));
+
+            container.Register<IReadOnlyList<CrimesServiceClient>>(c =>
+                 PrepareAgents());
+
+            container.AddSingleton<PositionCalculator>();
+        }
+
+        private IReadOnlyList<CrimesServiceClient> PrepareAgents()
+        {
+            var channels = new[]
+            {
+                 new Channel($"127.0.0.1:50051", ChannelCredentials.Insecure),
+                 new Channel($"127.0.0.1:50051", ChannelCredentials.Insecure),
+                 new Channel($"127.0.0.1:50051", ChannelCredentials.Insecure)
+            };
+
+            var clients = new[]
+            {
+                new CrimesServiceClient(channels[0]),
+                new CrimesServiceClient(channels[1]),
+                new CrimesServiceClient(channels[2])
+            };
+
+            return clients;
         }
     }
 }
