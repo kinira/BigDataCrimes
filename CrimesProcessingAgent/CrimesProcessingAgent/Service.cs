@@ -11,7 +11,9 @@ namespace CrimesProcessingAgent
     public class Service : CrimesServiceBase
     {
         public IStatisticProvider statisticProvider { get; set; }
+
         public PositionCalculator posCalculator { get; set; }
+
         public Service()
         {
             this.statisticProvider = new StatisticProvider();
@@ -30,7 +32,7 @@ namespace CrimesProcessingAgent
         public override async Task<CalculatePredictionResponse> GetProbability(CalculatePredictionRequest request, ServerCallContext context)
         {
             var calc = new PositionCalculator();
-            var dbData = await statisticProvider.CalculateAllCrimesByDistrctsByYear(DateTime.Parse(request.Date).Year);
+            var dbData = await statisticProvider.CalculateAllCrimesByDistrctsByYear(request.Year);
 
             var res = calc.CalculateAverageCrimes(new CaseSimple { X = request.X,
                                                           Y = request.Y,

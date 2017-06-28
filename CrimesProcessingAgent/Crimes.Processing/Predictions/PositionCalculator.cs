@@ -45,7 +45,7 @@ namespace Crimes.Processing.Predictions
         }
 
 
-        public double CalculateCrimeProbability(double averagePerDay, int daysSinceLastCrime)
+        public double CalculateCrimeProbability(double averagePerDay, double daysSinceLastCrime)
             => 1 - Math.Pow((1 - averagePerDay), daysSinceLastCrime);  // some sort of geometric distribution, commulative formula
 
         public double CalculateAverageCrimes(CaseSimple given, IEnumerable<CaseSimple> yearlySamples)

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static CrimesProcessing.Contracts.CrimesService;
 using Crimes.Processing.Predictions;
+using Crimes.Processing;
 
 namespace CrimesWebApi
 {
@@ -15,11 +16,13 @@ namespace CrimesWebApi
     {
         private IReadOnlyList<CrimesServiceClient> agents;
         private PositionCalculator calculator;
+        private StatisticProvider statisticProvider;
 
-        public HomeService(IReadOnlyList<CrimesServiceClient> agents, PositionCalculator calculator)
+        public HomeService(IReadOnlyList<CrimesServiceClient> agents, PositionCalculator calculator, StatisticProvider statisticProvider)
         {
             this.agents = agents;
             this.calculator = calculator;
+            this.statisticProvider = statisticProvider;
         }
 
         public object Any(HelloRequest request)
@@ -31,7 +34,7 @@ namespace CrimesWebApi
         {
             var year = DateTime.Now.Year;
             var tasks = new Dictionary<int, AsyncUnaryCall<CalculatePredictionResponse>>();
-            var yearAverages = new Dictionary<int , double>();
+            var yearAverages = new Dictionary<int, double>();
 
             for (int i = year; i >= year - 4; i--)
             {
@@ -48,9 +51,11 @@ namespace CrimesWebApi
                 yearAverages.Add(task.Key, (await task.Value).Probability);
 
             var expectation = calculator.GetAverageOfPreviousYears(yearAverages);
+            var recentCrimes = await statisticProvider.GetCrimesOneMonthBack();
+            var lastMonthData = calculator.CalculateAverageCrimes(new CaseSimple { X = request.X_coordinate, Y = request.Y_coordinate, Month = request.Month, Year = year }, recentCrimes);
+            var probability = calculator.CalculateCrimeProbability(expectation, lastMonthData);
 
-
-            return new PredictionResponse();
+            return new PredictionResponse { Probability = probability };
         }
 
     }

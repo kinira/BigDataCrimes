@@ -10,14 +10,16 @@ using Crimes.Processing.Predictions;
 
 namespace Crimes.Processing
 {
-    public class StatisticProvider : IStatisticProvider
+    public class StatisticProvider : IStatisticProvider, IDisposable
     {
         IDbCassandraProvider dbProvider { get; set; }
+
         ISession session { get; set; }
+
         public StatisticProvider()
         {
             this.dbProvider = new DbCassandraProvider();
-          this.session  = new SetUp().SetUpCassandra();
+            this.session = new SetUp().SetUpCassandra();
         }
 
         public IEnumerable<DistrictCrimes> CalculateAllCrimesByDistrcts(IEnumerable<CrimesDb> allCrimesByYears)
@@ -148,20 +150,21 @@ namespace Crimes.Processing
 
         public async Task<IEnumerable<CaseSimple>> CalculateAllCrimesByDistrctsByYear(int year)
         {
-            var task = await dbProvider.ReadCrimesByYear(session,year);
-
+            var task = await dbProvider.ReadCrimesByYear(session, year);
             var res = task.Select(x => new CaseSimple() { Year = x.Year, Type = x.PrimaryType, X = x.X_Coordinate, Y = x.Y_Coordinate, Month = x.CrimeDate.Month });
-
             return res;
         }
 
-        public async Task<IEnumerable<CaseSimple>> GetCrimesOneMonthBack(int year)
+        public async Task<IEnumerable<CaseSimple>> GetCrimesOneMonthBack()
         {
-            var task = await dbProvider.ReadCrimesByYear(session, year);
-
-            var res = task.Where(x=>x.CrimeDate.Month == DateTime.Now.AddMonths(-1).Month));
-            
+            var task = await dbProvider.ReadCrimesByYear(session, DateTime.Now.Year);
+            var res = task.Where(x => x.CrimeDate.Month == DateTime.Now.AddMonths(-1).Month);
             return res.Select(x => new CaseSimple() { Year = x.Year, Type = x.PrimaryType, X = x.X_Coordinate, Y = x.Y_Coordinate, Month = x.CrimeDate.Month });
+        }
+
+        public void Dispose()
+        {
+            this.session.Dispose();
         }
     }
 }

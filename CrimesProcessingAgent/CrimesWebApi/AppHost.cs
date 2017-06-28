@@ -1,4 +1,5 @@
-﻿using Crimes.Processing.Predictions;
+﻿using Crimes.Processing;
+using Crimes.Processing.Predictions;
 using Funq;
 using Grpc.Core;
 using ServiceStack;
@@ -29,10 +30,10 @@ namespace CrimesWebApi
             container.Register<IRedisClientsManager>(c =>
                 new RedisManagerPool(AppSettings.Get("REDIS_HOST", defaultValue: "localhost")));
 
-            container.Register<IReadOnlyList<CrimesServiceClient>>(c =>
-                 PrepareAgents());
+            container.Register(c => PrepareAgents());
 
             container.AddSingleton<PositionCalculator>();
+            container.AddScoped<IStatisticProvider, StatisticProvider>();
         }
 
         private IReadOnlyList<CrimesServiceClient> PrepareAgents()
