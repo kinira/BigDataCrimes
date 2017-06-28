@@ -30,10 +30,9 @@ namespace CrimesProcessingAgent
         public override async Task<CalculatePredictionResponse> GetProbability(CalculatePredictionRequest request, ServerCallContext context)
         {
             var calc = new PositionCalculator();
-            var dbData = await statisticProvider.CalculateAllCrimesByDistrctsByYear(DateTime.Parse(request.Date).Year);
+            var dbData = await statisticProvider.CalculateAllCrimesByDistrctsByYear(request.Year);
 
-            var res = calc.CalculateAverageCrimes(new CaseSimple { X = double.Parse(request.Xcoordinates),
-                                                          Y = double.Parse(request.Ycoordinates),
+            var res = calc.CalculateAverageCrimes(new CaseSimple { X = request.X, Y = request.Y,
                                                             Year = DateTime.Now.Year, Month = DateTime.Now.Month },dbData);
             return new CalculatePredictionResponse() { Probability = res };
         }
