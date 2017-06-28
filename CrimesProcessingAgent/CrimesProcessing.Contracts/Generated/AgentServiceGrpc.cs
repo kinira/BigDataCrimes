@@ -14,6 +14,10 @@ namespace CrimesProcessing.Contracts {
 
     static readonly grpc::Marshaller<global::CrimesProcessing.Contracts.CrimesRequest> __Marshaller_CrimesRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CrimesProcessing.Contracts.CrimesRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::CrimesProcessing.Contracts.CrimesResponse> __Marshaller_CrimesResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CrimesProcessing.Contracts.CrimesResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::CrimesProcessing.Contracts.CalculatePredictionRequest> __Marshaller_CalculatePredictionRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CrimesProcessing.Contracts.CalculatePredictionRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::CrimesProcessing.Contracts.CalculatePredictionResponse> __Marshaller_CalculatePredictionResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CrimesProcessing.Contracts.CalculatePredictionResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::CrimesProcessing.Contracts.CalculateAvgRequest> __Marshaller_CalculateAvgRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CrimesProcessing.Contracts.CalculateAvgRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::CrimesProcessing.Contracts.CalculateAvgResponse> __Marshaller_CalculateAvgResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CrimesProcessing.Contracts.CalculateAvgResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::CrimesProcessing.Contracts.CrimesRequest, global::CrimesProcessing.Contracts.CrimesResponse> __Method_SayHello = new grpc::Method<global::CrimesProcessing.Contracts.CrimesRequest, global::CrimesProcessing.Contracts.CrimesResponse>(
         grpc::MethodType.Unary,
@@ -21,6 +25,20 @@ namespace CrimesProcessing.Contracts {
         "SayHello",
         __Marshaller_CrimesRequest,
         __Marshaller_CrimesResponse);
+
+    static readonly grpc::Method<global::CrimesProcessing.Contracts.CalculatePredictionRequest, global::CrimesProcessing.Contracts.CalculatePredictionResponse> __Method_GetProbability = new grpc::Method<global::CrimesProcessing.Contracts.CalculatePredictionRequest, global::CrimesProcessing.Contracts.CalculatePredictionResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetProbability",
+        __Marshaller_CalculatePredictionRequest,
+        __Marshaller_CalculatePredictionResponse);
+
+    static readonly grpc::Method<global::CrimesProcessing.Contracts.CalculateAvgRequest, global::CrimesProcessing.Contracts.CalculateAvgResponse> __Method_CalculateCrimes = new grpc::Method<global::CrimesProcessing.Contracts.CalculateAvgRequest, global::CrimesProcessing.Contracts.CalculateAvgResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "CalculateCrimes",
+        __Marshaller_CalculateAvgRequest,
+        __Marshaller_CalculateAvgResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -32,6 +50,16 @@ namespace CrimesProcessing.Contracts {
     public abstract partial class CrimesServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::CrimesProcessing.Contracts.CrimesResponse> SayHello(global::CrimesProcessing.Contracts.CrimesRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::CrimesProcessing.Contracts.CalculatePredictionResponse> GetProbability(global::CrimesProcessing.Contracts.CalculatePredictionRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task CalculateCrimes(global::CrimesProcessing.Contracts.CalculateAvgRequest request, grpc::IServerStreamWriter<global::CrimesProcessing.Contracts.CalculateAvgResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -77,6 +105,30 @@ namespace CrimesProcessing.Contracts {
       {
         return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
       }
+      public virtual global::CrimesProcessing.Contracts.CalculatePredictionResponse GetProbability(global::CrimesProcessing.Contracts.CalculatePredictionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return GetProbability(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::CrimesProcessing.Contracts.CalculatePredictionResponse GetProbability(global::CrimesProcessing.Contracts.CalculatePredictionRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetProbability, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::CrimesProcessing.Contracts.CalculatePredictionResponse> GetProbabilityAsync(global::CrimesProcessing.Contracts.CalculatePredictionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return GetProbabilityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::CrimesProcessing.Contracts.CalculatePredictionResponse> GetProbabilityAsync(global::CrimesProcessing.Contracts.CalculatePredictionRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetProbability, null, options, request);
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::CrimesProcessing.Contracts.CalculateAvgResponse> CalculateCrimes(global::CrimesProcessing.Contracts.CalculateAvgRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return CalculateCrimes(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::CrimesProcessing.Contracts.CalculateAvgResponse> CalculateCrimes(global::CrimesProcessing.Contracts.CalculateAvgRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_CalculateCrimes, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override CrimesServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -89,7 +141,9 @@ namespace CrimesProcessing.Contracts {
     public static grpc::ServerServiceDefinition BindService(CrimesServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_GetProbability, serviceImpl.GetProbability)
+          .AddMethod(__Method_CalculateCrimes, serviceImpl.CalculateCrimes).Build();
     }
 
   }

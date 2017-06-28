@@ -23,14 +23,30 @@ namespace CrimesProcessing.Contracts {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChJBZ2VudFNlcnZpY2UucHJvdG8SGmNyaW1lc1Byb2Nlc3NpbmcuQ29udHJh",
-            "Y3RzIiAKDUNyaW1lc1JlcXVlc3QSDwoHbWVzc2FnZRgBIAEoCSIgCg5Dcmlt",
-            "ZXNSZXNwb25zZRIOCgZyZXN1bHQYASABKAkycgoNQ3JpbWVzU2VydmljZRJh",
-            "CghTYXlIZWxsbxIpLmNyaW1lc1Byb2Nlc3NpbmcuQ29udHJhY3RzLkNyaW1l",
-            "c1JlcXVlc3QaKi5jcmltZXNQcm9jZXNzaW5nLkNvbnRyYWN0cy5DcmltZXNS",
-            "ZXNwb25zZWIGcHJvdG8z"));
+            "Y3RzIiMKE0NhbGN1bGF0ZUF2Z1JlcXVlc3QSDAoEeWVhchgBIAEoBSJeChRD",
+            "YWxjdWxhdGVBdmdSZXNwb25zZRIMCgR5ZWFyGAEgASgFEhAKCGRpc3RyaWN0",
+            "GAIgASgFEhMKC2NyaW1lc0NvdW50GAMgASgFEhEKCWNyaW1lVHlwZRgEIAEo",
+            "CSJWChpDYWxjdWxhdGVQcmVkaWN0aW9uUmVxdWVzdBIMCgRkYXRlGAEgASgJ",
+            "EhQKDHhjb29yZGluYXRlcxgCIAEoCRIUCgx5Y29vcmRpbmF0ZXMYAyABKAki",
+            "MgobQ2FsY3VsYXRlUHJlZGljdGlvblJlc3BvbnNlEhMKC3Byb2JhYmlsaXR5",
+            "GAEgASgBIiAKDUNyaW1lc1JlcXVlc3QSDwoHbWVzc2FnZRgBIAEoCSIgCg5D",
+            "cmltZXNSZXNwb25zZRIOCgZyZXN1bHQYASABKAky7gIKDUNyaW1lc1NlcnZp",
+            "Y2USYQoIU2F5SGVsbG8SKS5jcmltZXNQcm9jZXNzaW5nLkNvbnRyYWN0cy5D",
+            "cmltZXNSZXF1ZXN0GiouY3JpbWVzUHJvY2Vzc2luZy5Db250cmFjdHMuQ3Jp",
+            "bWVzUmVzcG9uc2USgQEKDkdldFByb2JhYmlsaXR5EjYuY3JpbWVzUHJvY2Vz",
+            "c2luZy5Db250cmFjdHMuQ2FsY3VsYXRlUHJlZGljdGlvblJlcXVlc3QaNy5j",
+            "cmltZXNQcm9jZXNzaW5nLkNvbnRyYWN0cy5DYWxjdWxhdGVQcmVkaWN0aW9u",
+            "UmVzcG9uc2USdgoPQ2FsY3VsYXRlQ3JpbWVzEi8uY3JpbWVzUHJvY2Vzc2lu",
+            "Zy5Db250cmFjdHMuQ2FsY3VsYXRlQXZnUmVxdWVzdBowLmNyaW1lc1Byb2Nl",
+            "c3NpbmcuQ29udHJhY3RzLkNhbGN1bGF0ZUF2Z1Jlc3BvbnNlMAFiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculateAvgRequest), global::CrimesProcessing.Contracts.CalculateAvgRequest.Parser, new[]{ "Year" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculateAvgResponse), global::CrimesProcessing.Contracts.CalculateAvgResponse.Parser, new[]{ "Year", "District", "CrimesCount", "CrimeType" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculatePredictionRequest), global::CrimesProcessing.Contracts.CalculatePredictionRequest.Parser, new[]{ "Date", "Xcoordinates", "Ycoordinates" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculatePredictionResponse), global::CrimesProcessing.Contracts.CalculatePredictionResponse.Parser, new[]{ "Probability" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CrimesRequest), global::CrimesProcessing.Contracts.CrimesRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CrimesResponse), global::CrimesProcessing.Contracts.CrimesResponse.Parser, new[]{ "Result" }, null, null, null)
           }));
@@ -39,6 +55,614 @@ namespace CrimesProcessing.Contracts {
 
   }
   #region Messages
+  public sealed partial class CalculateAvgRequest : pb::IMessage<CalculateAvgRequest> {
+    private static readonly pb::MessageParser<CalculateAvgRequest> _parser = new pb::MessageParser<CalculateAvgRequest>(() => new CalculateAvgRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CalculateAvgRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculateAvgRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculateAvgRequest(CalculateAvgRequest other) : this() {
+      year_ = other.year_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculateAvgRequest Clone() {
+      return new CalculateAvgRequest(this);
+    }
+
+    /// <summary>Field number for the "year" field.</summary>
+    public const int YearFieldNumber = 1;
+    private int year_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Year {
+      get { return year_; }
+      set {
+        year_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CalculateAvgRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CalculateAvgRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Year != other.Year) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Year != 0) hash ^= Year.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Year != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Year);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Year != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Year);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CalculateAvgRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Year != 0) {
+        Year = other.Year;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Year = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CalculateAvgResponse : pb::IMessage<CalculateAvgResponse> {
+    private static readonly pb::MessageParser<CalculateAvgResponse> _parser = new pb::MessageParser<CalculateAvgResponse>(() => new CalculateAvgResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CalculateAvgResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculateAvgResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculateAvgResponse(CalculateAvgResponse other) : this() {
+      year_ = other.year_;
+      district_ = other.district_;
+      crimesCount_ = other.crimesCount_;
+      crimeType_ = other.crimeType_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculateAvgResponse Clone() {
+      return new CalculateAvgResponse(this);
+    }
+
+    /// <summary>Field number for the "year" field.</summary>
+    public const int YearFieldNumber = 1;
+    private int year_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Year {
+      get { return year_; }
+      set {
+        year_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "district" field.</summary>
+    public const int DistrictFieldNumber = 2;
+    private int district_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int District {
+      get { return district_; }
+      set {
+        district_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "crimesCount" field.</summary>
+    public const int CrimesCountFieldNumber = 3;
+    private int crimesCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CrimesCount {
+      get { return crimesCount_; }
+      set {
+        crimesCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "crimeType" field.</summary>
+    public const int CrimeTypeFieldNumber = 4;
+    private string crimeType_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string CrimeType {
+      get { return crimeType_; }
+      set {
+        crimeType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CalculateAvgResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CalculateAvgResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Year != other.Year) return false;
+      if (District != other.District) return false;
+      if (CrimesCount != other.CrimesCount) return false;
+      if (CrimeType != other.CrimeType) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Year != 0) hash ^= Year.GetHashCode();
+      if (District != 0) hash ^= District.GetHashCode();
+      if (CrimesCount != 0) hash ^= CrimesCount.GetHashCode();
+      if (CrimeType.Length != 0) hash ^= CrimeType.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Year != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Year);
+      }
+      if (District != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(District);
+      }
+      if (CrimesCount != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(CrimesCount);
+      }
+      if (CrimeType.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(CrimeType);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Year != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Year);
+      }
+      if (District != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(District);
+      }
+      if (CrimesCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CrimesCount);
+      }
+      if (CrimeType.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CrimeType);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CalculateAvgResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Year != 0) {
+        Year = other.Year;
+      }
+      if (other.District != 0) {
+        District = other.District;
+      }
+      if (other.CrimesCount != 0) {
+        CrimesCount = other.CrimesCount;
+      }
+      if (other.CrimeType.Length != 0) {
+        CrimeType = other.CrimeType;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Year = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            District = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            CrimesCount = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            CrimeType = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CalculatePredictionRequest : pb::IMessage<CalculatePredictionRequest> {
+    private static readonly pb::MessageParser<CalculatePredictionRequest> _parser = new pb::MessageParser<CalculatePredictionRequest>(() => new CalculatePredictionRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CalculatePredictionRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculatePredictionRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculatePredictionRequest(CalculatePredictionRequest other) : this() {
+      date_ = other.date_;
+      xcoordinates_ = other.xcoordinates_;
+      ycoordinates_ = other.ycoordinates_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculatePredictionRequest Clone() {
+      return new CalculatePredictionRequest(this);
+    }
+
+    /// <summary>Field number for the "date" field.</summary>
+    public const int DateFieldNumber = 1;
+    private string date_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Date {
+      get { return date_; }
+      set {
+        date_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "xcoordinates" field.</summary>
+    public const int XcoordinatesFieldNumber = 2;
+    private string xcoordinates_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Xcoordinates {
+      get { return xcoordinates_; }
+      set {
+        xcoordinates_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "ycoordinates" field.</summary>
+    public const int YcoordinatesFieldNumber = 3;
+    private string ycoordinates_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Ycoordinates {
+      get { return ycoordinates_; }
+      set {
+        ycoordinates_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CalculatePredictionRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CalculatePredictionRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Date != other.Date) return false;
+      if (Xcoordinates != other.Xcoordinates) return false;
+      if (Ycoordinates != other.Ycoordinates) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Date.Length != 0) hash ^= Date.GetHashCode();
+      if (Xcoordinates.Length != 0) hash ^= Xcoordinates.GetHashCode();
+      if (Ycoordinates.Length != 0) hash ^= Ycoordinates.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Date.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Date);
+      }
+      if (Xcoordinates.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Xcoordinates);
+      }
+      if (Ycoordinates.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Ycoordinates);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Date.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Date);
+      }
+      if (Xcoordinates.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Xcoordinates);
+      }
+      if (Ycoordinates.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Ycoordinates);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CalculatePredictionRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Date.Length != 0) {
+        Date = other.Date;
+      }
+      if (other.Xcoordinates.Length != 0) {
+        Xcoordinates = other.Xcoordinates;
+      }
+      if (other.Ycoordinates.Length != 0) {
+        Ycoordinates = other.Ycoordinates;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Date = input.ReadString();
+            break;
+          }
+          case 18: {
+            Xcoordinates = input.ReadString();
+            break;
+          }
+          case 26: {
+            Ycoordinates = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CalculatePredictionResponse : pb::IMessage<CalculatePredictionResponse> {
+    private static readonly pb::MessageParser<CalculatePredictionResponse> _parser = new pb::MessageParser<CalculatePredictionResponse>(() => new CalculatePredictionResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CalculatePredictionResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculatePredictionResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculatePredictionResponse(CalculatePredictionResponse other) : this() {
+      probability_ = other.probability_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CalculatePredictionResponse Clone() {
+      return new CalculatePredictionResponse(this);
+    }
+
+    /// <summary>Field number for the "probability" field.</summary>
+    public const int ProbabilityFieldNumber = 1;
+    private double probability_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double Probability {
+      get { return probability_; }
+      set {
+        probability_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CalculatePredictionResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CalculatePredictionResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Probability != other.Probability) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Probability != 0D) hash ^= Probability.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Probability != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(Probability);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Probability != 0D) {
+        size += 1 + 8;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CalculatePredictionResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Probability != 0D) {
+        Probability = other.Probability;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 9: {
+            Probability = input.ReadDouble();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class CrimesRequest : pb::IMessage<CrimesRequest> {
     private static readonly pb::MessageParser<CrimesRequest> _parser = new pb::MessageParser<CrimesRequest>(() => new CrimesRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -46,7 +670,7 @@ namespace CrimesProcessing.Contracts {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[0]; }
+      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -163,7 +787,7 @@ namespace CrimesProcessing.Contracts {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[1]; }
+      get { return global::CrimesProcessing.Contracts.AgentServiceReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

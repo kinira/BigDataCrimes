@@ -5,31 +5,30 @@ package crimesProcessing.Contracts;
 
 service CrimesService {
   rpc SayHello (CrimesRequest) returns (CrimesResponse);
-  rpc GetProbability (CalculatePredictionRequest) returns (CalculatePredictionResponse)
-  rpc CalculateCrimes (CalculateAvgRequest) returns (stream CalculateAvgResponse)
+  rpc GetProbability (CalculatePredictionRequest) returns (CalculatePredictionResponse);
+  rpc CalculateCrimes (CalculateAvgRequest) returns (stream CalculateAvgResponse);
 }
 
 message CalculateAvgRequest{
-int year = 1
+	int32 year = 1;
 }
 
 message CalculateAvgResponse{
-int year = 1,
-int district = 2,
-int crimesCount = 3,
-string crimeType = 4
+	int32 year = 1;
+	int32 district = 2;
+	int32 crimesCount = 3;
+	string crimeType = 4;
 }
 
 message CalculatePredictionRequest {
   string date = 1;
-  string xcoordinates = 2,
-  string ycoordinates = 3
+  string xcoordinates = 2;
+  string ycoordinates = 3;
 }
 
 message CalculatePredictionResponse {
-  double probability;
+  double probability = 1;
 }
-
 
 message CrimesRequest {
   string message = 1;
