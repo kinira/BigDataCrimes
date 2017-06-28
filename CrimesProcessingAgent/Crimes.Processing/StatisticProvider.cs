@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Crimes.Processing.Models;
 using System.Linq;
+using Cassandra;
+using Crimes.Cassandra;
+using System.Threading.Tasks;
+using Crimes.Processing.Predictions;
 
 namespace Crimes.Processing
 {
     public class StatisticProvider : IStatisticProvider
     {
+        IDbCassandraProvider dbProvider { get; set; }
+        ISession session { get; set; }
+        public StatisticProvider()
+        {
+            this.dbProvider = new DbCassandraProvider();
+          this.session  = new SetUp().SetUpCassandra();
+        }
+
         public IEnumerable<DistrictCrimes> CalculateAllCrimesByDistrcts(IEnumerable<CrimesDb> allCrimesByYears)
         {
             var crimessummary = new Dictionary<(int, string), int>();
@@ -24,6 +36,26 @@ namespace Crimes.Processing
 
             return crimessummary.Select(kvp => new DistrictCrimes { District = kvp.Key.Item1, CrimeType = kvp.Key.Item2, CrimAvg = kvp.Value });
         }
+
+        public async Task<IEnumerable<DistrictCrimes>> CalculateAllCrimesInDisctrictsByYear(int year)
+        {
+            var allCrimesByYear = await dbProvider.ReadCrimesByYear(session, year);
+
+            var crimessummary = new Dictionary<(int, string), int>();
+            foreach (var crime in allCrimesByYear)
+            {
+                var currentKey = (crime.District, crime.PrimaryType);
+
+                if (!crimessummary.ContainsKey(currentKey))
+                    crimessummary.Add(currentKey, 1);
+                else
+                    crimessummary[currentKey]++;
+            }
+
+
+            return crimessummary.Select(kvp => new DistrictCrimes { District = kvp.Key.Item1, CrimeType = kvp.Key.Item2, CrimAvg = kvp.Value });
+        }
+
 
         public List<DisctrictScore> CalculateDistrictScores(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
         {
@@ -112,6 +144,15 @@ namespace Crimes.Processing
                 default:
                     return 0;
             }
+        }
+
+        public async Task<IEnumerable<CaseSimple>> CalculateAllCrimesByDistrctsByYear(int year)
+        {
+            var task = await dbProvider.ReadCrimesByYear(session,year);
+
+            var res = task.Select(x => new CaseSimple() { Year = x.Year, Type = x.PrimaryType, X = x.X_Coordinate, Y = x.Y_Coordinate, Month = x.CrimeDate.Month });
+
+            return res;
         }
     }
 }

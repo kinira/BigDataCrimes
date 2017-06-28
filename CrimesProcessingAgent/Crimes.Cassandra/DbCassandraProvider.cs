@@ -6,6 +6,7 @@ using Crimes.Processing.Models;
 using Cassandra.Mapping;
 using System.Linq;
 using Crimes.Processing.Extensions;
+using System.Threading.Tasks;
 
 namespace Crimes.Processing
 {
@@ -110,6 +111,14 @@ namespace Crimes.Processing
             }
 
             return allData;
+        }
+
+        public async Task<IEnumerable<CrimesDb>> ReadCrimesByYear(ISession session, int year)
+        {
+            var rowDbData = await session.ExecuteAsync(new SimpleStatement($"select * from crimes where \"year\"={year} Allow Filtering"));
+            var readedData = MappedToCrimes(rowDbData);
+
+            return readedData;
         }
     }
 }

@@ -22,8 +22,9 @@ message CalculateAvgResponse{
 
 message CalculatePredictionRequest {
   string date = 1;
-  string xcoordinates = 2;
-  string ycoordinates = 3;
+  double x = 2;
+  double y = 3;
+  int month = 4;
 }
 
 message CalculatePredictionResponse {

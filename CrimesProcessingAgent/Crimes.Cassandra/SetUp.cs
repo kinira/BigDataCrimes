@@ -3,9 +3,9 @@ using System;
 
 namespace Crimes.Cassandra
 {
-    public class Cassandra
+    public class SetUp
     {
-        public static ISession SetUpCassandra()
+        public ISession SetUpCassandra()
         {
             Cluster cluster = Cluster.Builder()
                 .AddContactPoints("35.158.163.178", "35.158.217.185", "35.158.151.241")
