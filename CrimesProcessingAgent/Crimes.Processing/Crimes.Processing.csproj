@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Crimes.Cassandra\Crimes.Cassandra.csproj" />
+    <ProjectReference Include="..\CrimesProcessing.Contracts\CrimesProcessing.Contracts.csproj" />
+    <ProjectReference Include="..\CrimesWebApi.ServiceModel\CrimesWebApi.ServiceModel.csproj" />
   </ItemGroup>
 
 </Project>

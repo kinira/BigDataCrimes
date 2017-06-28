@@ -164,7 +164,7 @@ namespace Crimes.Processing
 
         public void Dispose()
         {
-            this.session.Dispose();
+            //this.session.Dispose();
         }
     }
 }

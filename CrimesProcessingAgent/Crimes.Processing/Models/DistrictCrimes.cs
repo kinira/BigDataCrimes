@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CrimesProcessing.Contracts;
 
 namespace Crimes.Processing.Models
 {
@@ -10,5 +8,15 @@ namespace Crimes.Processing.Models
         public int District { get; set; }
         public string CrimeType { get; set; }
         public int CrimAvg { get; set; }
+
+        public CalculateAvgResponse MapToAgentResponse()
+           => new CalculateAvgResponse
+           {
+               CrimesCount = this.CrimAvg,
+               CrimeType = this.CrimeType,
+               District = this.District,
+               Year = this.Year
+           };
+
     }
 }

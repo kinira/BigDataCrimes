@@ -25,7 +25,7 @@ namespace CrimesProcessingAgent
             var data = await this.statisticProvider.CalculateAllCrimesInDisctrictsByYear(request.Year);
 
             foreach (var item in data)
-                await responseStream.WriteAsync(new CalculateAvgResponse() { CrimesCount = item.CrimAvg, CrimeType = item.CrimeType, District = item.District, Year = request.Year});
+                await responseStream.WriteAsync(item.MapToAgentResponse());
 
         }
 

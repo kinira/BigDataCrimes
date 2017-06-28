@@ -33,7 +33,7 @@ namespace CrimesWebApi
             container.Register(c => PrepareAgents());
 
             container.AddSingleton<PositionCalculator>();
-            container.AddScoped<IStatisticProvider, StatisticProvider>();
+            container.AddScoped<IStatisticProvider>(c=> new StatisticProvider());
         }
 
         private IReadOnlyList<CrimesServiceClient> PrepareAgents()

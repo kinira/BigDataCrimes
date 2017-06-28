@@ -15,10 +15,10 @@ namespace CrimesWebApi
     public class HomeService : Service
     {
         private IReadOnlyList<CrimesServiceClient> agents;
+        private IStatisticProvider statisticProvider;
         private PositionCalculator calculator;
-        private StatisticProvider statisticProvider;
 
-        public HomeService(IReadOnlyList<CrimesServiceClient> agents, PositionCalculator calculator, StatisticProvider statisticProvider)
+        public HomeService(IReadOnlyList<CrimesServiceClient> agents, PositionCalculator calculator, IStatisticProvider statisticProvider)
         {
             this.agents = agents;
             this.calculator = calculator;
@@ -43,7 +43,7 @@ namespace CrimesWebApi
                     Month = request.Month,
                     X = request.X_coordinate,
                     Y = request.Y_coordinate,
-                    Year = year
+                    Year = i
                 }));
             }
 
@@ -52,7 +52,7 @@ namespace CrimesWebApi
 
             var expectation = calculator.GetAverageOfPreviousYears(yearAverages);
             var recentCrimes = await statisticProvider.GetCrimesOneMonthBack();
-            var lastMonthData = calculator.CalculateAverageCrimes(new CaseSimple { X = request.X_coordinate, Y = request.Y_coordinate, Month = request.Month, Year = year }, recentCrimes);
+            var lastMonthData = calculator.CalculateAverageCrimes(CaseSimple.FromApiRequest(request), recentCrimes);
             var probability = calculator.CalculateCrimeProbability(expectation, lastMonthData);
 
             return new PredictionResponse { Probability = probability };
