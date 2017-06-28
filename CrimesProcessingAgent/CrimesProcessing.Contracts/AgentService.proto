@@ -21,10 +21,10 @@ message CalculateAvgResponse{
 }
 
 message CalculatePredictionRequest {
-  string date = 1;
+  int32 year = 1;
   double x = 2;
   double y = 3;
-  int month = 4;
+  int32 month = 4;
 }
 
 message CalculatePredictionResponse {

@@ -26,26 +26,25 @@ namespace CrimesProcessing.Contracts {
             "Y3RzIiMKE0NhbGN1bGF0ZUF2Z1JlcXVlc3QSDAoEeWVhchgBIAEoBSJeChRD",
             "YWxjdWxhdGVBdmdSZXNwb25zZRIMCgR5ZWFyGAEgASgFEhAKCGRpc3RyaWN0",
             "GAIgASgFEhMKC2NyaW1lc0NvdW50GAMgASgFEhEKCWNyaW1lVHlwZRgEIAEo",
-            "CSJWChpDYWxjdWxhdGVQcmVkaWN0aW9uUmVxdWVzdBIMCgRkYXRlGAEgASgJ",
-            "EhQKDHhjb29yZGluYXRlcxgCIAEoCRIUCgx5Y29vcmRpbmF0ZXMYAyABKAki",
-            "MgobQ2FsY3VsYXRlUHJlZGljdGlvblJlc3BvbnNlEhMKC3Byb2JhYmlsaXR5",
-            "GAEgASgBIiAKDUNyaW1lc1JlcXVlc3QSDwoHbWVzc2FnZRgBIAEoCSIgCg5D",
-            "cmltZXNSZXNwb25zZRIOCgZyZXN1bHQYASABKAky7gIKDUNyaW1lc1NlcnZp",
-            "Y2USYQoIU2F5SGVsbG8SKS5jcmltZXNQcm9jZXNzaW5nLkNvbnRyYWN0cy5D",
-            "cmltZXNSZXF1ZXN0GiouY3JpbWVzUHJvY2Vzc2luZy5Db250cmFjdHMuQ3Jp",
-            "bWVzUmVzcG9uc2USgQEKDkdldFByb2JhYmlsaXR5EjYuY3JpbWVzUHJvY2Vz",
-            "c2luZy5Db250cmFjdHMuQ2FsY3VsYXRlUHJlZGljdGlvblJlcXVlc3QaNy5j",
-            "cmltZXNQcm9jZXNzaW5nLkNvbnRyYWN0cy5DYWxjdWxhdGVQcmVkaWN0aW9u",
-            "UmVzcG9uc2USdgoPQ2FsY3VsYXRlQ3JpbWVzEi8uY3JpbWVzUHJvY2Vzc2lu",
-            "Zy5Db250cmFjdHMuQ2FsY3VsYXRlQXZnUmVxdWVzdBowLmNyaW1lc1Byb2Nl",
-            "c3NpbmcuQ29udHJhY3RzLkNhbGN1bGF0ZUF2Z1Jlc3BvbnNlMAFiBnByb3Rv",
-            "Mw=="));
+            "CSJPChpDYWxjdWxhdGVQcmVkaWN0aW9uUmVxdWVzdBIMCgR5ZWFyGAEgASgF",
+            "EgkKAXgYAiABKAESCQoBeRgDIAEoARINCgVtb250aBgEIAEoBSIyChtDYWxj",
+            "dWxhdGVQcmVkaWN0aW9uUmVzcG9uc2USEwoLcHJvYmFiaWxpdHkYASABKAEi",
+            "IAoNQ3JpbWVzUmVxdWVzdBIPCgdtZXNzYWdlGAEgASgJIiAKDkNyaW1lc1Jl",
+            "c3BvbnNlEg4KBnJlc3VsdBgBIAEoCTLuAgoNQ3JpbWVzU2VydmljZRJhCghT",
+            "YXlIZWxsbxIpLmNyaW1lc1Byb2Nlc3NpbmcuQ29udHJhY3RzLkNyaW1lc1Jl",
+            "cXVlc3QaKi5jcmltZXNQcm9jZXNzaW5nLkNvbnRyYWN0cy5DcmltZXNSZXNw",
+            "b25zZRKBAQoOR2V0UHJvYmFiaWxpdHkSNi5jcmltZXNQcm9jZXNzaW5nLkNv",
+            "bnRyYWN0cy5DYWxjdWxhdGVQcmVkaWN0aW9uUmVxdWVzdBo3LmNyaW1lc1By",
+            "b2Nlc3NpbmcuQ29udHJhY3RzLkNhbGN1bGF0ZVByZWRpY3Rpb25SZXNwb25z",
+            "ZRJ2Cg9DYWxjdWxhdGVDcmltZXMSLy5jcmltZXNQcm9jZXNzaW5nLkNvbnRy",
+            "YWN0cy5DYWxjdWxhdGVBdmdSZXF1ZXN0GjAuY3JpbWVzUHJvY2Vzc2luZy5D",
+            "b250cmFjdHMuQ2FsY3VsYXRlQXZnUmVzcG9uc2UwAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculateAvgRequest), global::CrimesProcessing.Contracts.CalculateAvgRequest.Parser, new[]{ "Year" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculateAvgResponse), global::CrimesProcessing.Contracts.CalculateAvgResponse.Parser, new[]{ "Year", "District", "CrimesCount", "CrimeType" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculatePredictionRequest), global::CrimesProcessing.Contracts.CalculatePredictionRequest.Parser, new[]{ "Date", "Xcoordinates", "Ycoordinates" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculatePredictionRequest), global::CrimesProcessing.Contracts.CalculatePredictionRequest.Parser, new[]{ "Year", "X", "Y", "Month" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CalculatePredictionResponse), global::CrimesProcessing.Contracts.CalculatePredictionResponse.Parser, new[]{ "Probability" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CrimesRequest), global::CrimesProcessing.Contracts.CrimesRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CrimesProcessing.Contracts.CrimesResponse), global::CrimesProcessing.Contracts.CrimesResponse.Parser, new[]{ "Result" }, null, null, null)
@@ -397,9 +396,10 @@ namespace CrimesProcessing.Contracts {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public CalculatePredictionRequest(CalculatePredictionRequest other) : this() {
-      date_ = other.date_;
-      xcoordinates_ = other.xcoordinates_;
-      ycoordinates_ = other.ycoordinates_;
+      year_ = other.year_;
+      x_ = other.x_;
+      y_ = other.y_;
+      month_ = other.month_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -407,36 +407,47 @@ namespace CrimesProcessing.Contracts {
       return new CalculatePredictionRequest(this);
     }
 
-    /// <summary>Field number for the "date" field.</summary>
-    public const int DateFieldNumber = 1;
-    private string date_ = "";
+    /// <summary>Field number for the "year" field.</summary>
+    public const int YearFieldNumber = 1;
+    private int year_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Date {
-      get { return date_; }
+    public int Year {
+      get { return year_; }
       set {
-        date_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        year_ = value;
       }
     }
 
-    /// <summary>Field number for the "xcoordinates" field.</summary>
-    public const int XcoordinatesFieldNumber = 2;
-    private string xcoordinates_ = "";
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 2;
+    private double x_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Xcoordinates {
-      get { return xcoordinates_; }
+    public double X {
+      get { return x_; }
       set {
-        xcoordinates_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        x_ = value;
       }
     }
 
-    /// <summary>Field number for the "ycoordinates" field.</summary>
-    public const int YcoordinatesFieldNumber = 3;
-    private string ycoordinates_ = "";
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 3;
+    private double y_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Ycoordinates {
-      get { return ycoordinates_; }
+    public double Y {
+      get { return y_; }
       set {
-        ycoordinates_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "month" field.</summary>
+    public const int MonthFieldNumber = 4;
+    private int month_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Month {
+      get { return month_; }
+      set {
+        month_ = value;
       }
     }
 
@@ -453,18 +464,20 @@ namespace CrimesProcessing.Contracts {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Date != other.Date) return false;
-      if (Xcoordinates != other.Xcoordinates) return false;
-      if (Ycoordinates != other.Ycoordinates) return false;
+      if (Year != other.Year) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
+      if (Month != other.Month) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Date.Length != 0) hash ^= Date.GetHashCode();
-      if (Xcoordinates.Length != 0) hash ^= Xcoordinates.GetHashCode();
-      if (Ycoordinates.Length != 0) hash ^= Ycoordinates.GetHashCode();
+      if (Year != 0) hash ^= Year.GetHashCode();
+      if (X != 0D) hash ^= X.GetHashCode();
+      if (Y != 0D) hash ^= Y.GetHashCode();
+      if (Month != 0) hash ^= Month.GetHashCode();
       return hash;
     }
 
@@ -475,31 +488,38 @@ namespace CrimesProcessing.Contracts {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Date.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Date);
+      if (Year != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Year);
       }
-      if (Xcoordinates.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Xcoordinates);
+      if (X != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(X);
       }
-      if (Ycoordinates.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Ycoordinates);
+      if (Y != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(Y);
+      }
+      if (Month != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Month);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Date.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Date);
+      if (Year != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Year);
       }
-      if (Xcoordinates.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Xcoordinates);
+      if (X != 0D) {
+        size += 1 + 8;
       }
-      if (Ycoordinates.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Ycoordinates);
+      if (Y != 0D) {
+        size += 1 + 8;
+      }
+      if (Month != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Month);
       }
       return size;
     }
@@ -509,14 +529,17 @@ namespace CrimesProcessing.Contracts {
       if (other == null) {
         return;
       }
-      if (other.Date.Length != 0) {
-        Date = other.Date;
+      if (other.Year != 0) {
+        Year = other.Year;
       }
-      if (other.Xcoordinates.Length != 0) {
-        Xcoordinates = other.Xcoordinates;
+      if (other.X != 0D) {
+        X = other.X;
       }
-      if (other.Ycoordinates.Length != 0) {
-        Ycoordinates = other.Ycoordinates;
+      if (other.Y != 0D) {
+        Y = other.Y;
+      }
+      if (other.Month != 0) {
+        Month = other.Month;
       }
     }
 
@@ -528,16 +551,20 @@ namespace CrimesProcessing.Contracts {
           default:
             input.SkipLastField();
             break;
-          case 10: {
-            Date = input.ReadString();
+          case 8: {
+            Year = input.ReadInt32();
             break;
           }
-          case 18: {
-            Xcoordinates = input.ReadString();
+          case 17: {
+            X = input.ReadDouble();
             break;
           }
-          case 26: {
-            Ycoordinates = input.ReadString();
+          case 25: {
+            Y = input.ReadDouble();
+            break;
+          }
+          case 32: {
+            Month = input.ReadInt32();
             break;
           }
         }
