@@ -8,22 +8,21 @@ namespace Crimes.Processing
 {
     public class StatisticProvider : IStatisticProvider
     {
-        public Dictionary<int, Dictionary<Tuple<int, string>, int>> CalculateAllCrimesByDistrcts(Dictionary<int, IEnumerable<CrimesDb>> allCrimesByYears)
+        public IEnumerable<DistrictCrimes> CalculateAllCrimesByDistrcts(IEnumerable<CrimesDb> allCrimesByYears)
         {
-            var crimessummary = new Dictionary<int, Dictionary<Tuple<int, string>, int>>();
-            foreach (var key in allCrimesByYears.Keys)
+            var crimessummary = new Dictionary<(int, string), int>();
+            foreach (var crime in allCrimesByYears)
             {
-                crimessummary.Add(key, new Dictionary<Tuple<int, string>, int>());
-                foreach (var crime in allCrimesByYears[key])
-                {
-                    var currentKey = new Tuple<int, string>(crime.District, crime.PrimaryType);
-                    if (!crimessummary[key].ContainsKey(currentKey))
-                        crimessummary[key].Add(currentKey, 1);
-                    else
-                        crimessummary[key][currentKey]++;
-                }
+                var currentKey = (crime.District, crime.PrimaryType);
+
+                if (!crimessummary.ContainsKey(currentKey))
+                    crimessummary.Add(currentKey, 1);
+                else
+                    crimessummary[currentKey]++;
             }
-            return crimessummary;
+
+
+            return crimessummary.Select(kvp => new DistrictCrimes { District = kvp.Key.Item1, CrimeType = kvp.Key.Item2, CrimAvg = kvp.Value });
         }
 
         public List<DisctrictScore> CalculateDistrictScores(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
@@ -35,7 +34,7 @@ namespace Crimes.Processing
 
                 var districtSavety = new Dictionary<int, int>();
 
-               
+
 
                 foreach (var yearCrime in yearCrimes.Value)
                 {
@@ -54,7 +53,7 @@ namespace Crimes.Processing
 
                         res.Add(new DisctrictScore() { District = yearCrime.Key.Item1, Score = score, Year = yearCrimes.Key });
                     }
-                }                
+                }
             }
             return res;
         }

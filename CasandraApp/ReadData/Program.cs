@@ -1,5 +1,7 @@
 ﻿using CasandraApp;
 using Cassandra;
+using ReadData.Models;
+using ReadData.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +21,25 @@ namespace ReadData
 
             DisplayCrimesByDistricts(allCrimesByDistricts);
 
-            CalculateDistrictScores(allCrimesByDistricts);
+           var foreRedis = CalculateDistrictScores(allCrimesByDistricts);
+
+            IRedisManager manager = new RedisManager();
+
+            manager.InsertIntoRedis(foreRedis);
 
             Console.WriteLine("End");
         }
 
-        private static void CalculateDistrictScores(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
+        private static List<DisctrictScore> CalculateDistrictScores(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
         {
+            var res = new List<DisctrictScore>();
             foreach (var yearCrimes in allCrimesByDistricts)
             {
                 Console.WriteLine($"Statistcs for year {yearCrimes.Key}");
 
                 var districtSavety = new Dictionary<int, int>();
+
+
 
                 foreach (var yearCrime in yearCrimes.Value)
                 {
@@ -47,15 +56,11 @@ namespace ReadData
 
                         districtSavety.Add(yearCrime.Key.Item1, score);
 
-                        Console.WriteLine($"Score in district {yearCrime.Key.Item1} is {score}");
+                        res.Add(new DisctrictScore() { District = yearCrime.Key.Item1, Score = score, Year = yearCrimes.Key });
                     }
                 }
-                var maxScore = districtSavety.Values.Max();
-                var minScore = districtSavety.Values.Min();
-                Console.WriteLine($"The best district in Chicago for {yearCrimes.Key} is: {districtSavety.First(x => x.Value == minScore).Key}");
-                Console.WriteLine($"The worst district in Chicago for {yearCrimes.Key} is: {districtSavety.First(x => x.Value == maxScore).Key}");
-
             }
+            return res;
         }
 
         private static void DisplayCrimesByDistricts(Dictionary<int, Dictionary<Tuple<int, string>, int>> allCrimesByDistricts)
@@ -93,9 +98,9 @@ namespace ReadData
         private static Dictionary<int, IEnumerable<Crimes>> ReadEverything(ISession session)
         {
             var allData = new Dictionary<int, IEnumerable<Crimes>>();
-            for (int i = 2001; i < 2017; i++)
+            for (int i = 2001; i < 2002; i++)
             {
-                var rowDbData = session.Execute($"select * from crimes where \"year\"={i} Allow Filtering");
+               var rowDbData = session.Execute($"select * from crimes where \"year\"={i} Allow Filtering");
 
                 var readedData = MappedToCrimes(rowDbData);
 
