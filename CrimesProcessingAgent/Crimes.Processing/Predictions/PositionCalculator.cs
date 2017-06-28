@@ -29,6 +29,22 @@ namespace Crimes.Processing.Predictions
 
     public class PositionCalculator
     {
+
+        public double GetAverageOfPreviousYears(IDictionary<int, double> yearlyAverages)
+        {
+            var currentYear = DateTime.Now.Year;
+            var coefficients = new[] {
+                    0.5, // this year
+                    0.3, // prev year
+                    0.1,
+                    0.05,
+                    0.05
+            };
+
+            return Enumerable.Range(0, 5).Sum(i => coefficients[i] * yearlyAverages[currentYear - i]);
+        }
+
+
         public double CalculateCrimeProbability(double averagePerDay, int daysSinceLastCrime)
             => 1 - Math.Pow((1 - averagePerDay), daysSinceLastCrime);  // some sort of geometric distribution, commulative formula
 
