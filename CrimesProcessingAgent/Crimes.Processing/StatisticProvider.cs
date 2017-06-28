@@ -173,7 +173,7 @@ namespace Crimes.Processing
             else
             {
                 var task = await dbProvider.ReadCrimesByYear(session, year);
-            var res = task.Select(CaseSimple.FromDbModel);
+                var res = task.Select(CaseSimple.FromDbModel);
                 rediesManager.InsertCaseSimple(year, res);
                 return res;
             }
@@ -182,13 +182,17 @@ namespace Crimes.Processing
         public async Task<IEnumerable<CaseSimple>> GetCrimesOneMonthBack()
         {
             var localMonthBack = new LocalDate(DateTime.Now.Year, DateTime.Now.Month - 1, DateTime.Now.Day);
-
+            var dataFromRedis = rediesManager.HasCaseSimple(DateTime.Now.Year.ToString());
+            if (dataFromRedis != null)
+            {
                 return dataFromRedis;
+            }
+
             else
             {
                 var task = await dbProvider.ReadCrimesByYear(session, DateTime.Now.Year);
-            var res = task.Where(x => x.CrimeDate > localMonthBack);
-            return res.Select(CaseSimple.FromDbModel);
+                var res = task.Where(x => x.CrimeDate > localMonthBack);
+                var forReturn = res.Select(CaseSimple.FromDbModel);
                 rediesManager.InsertCaseSimple(DateTime.Now.Year, forReturn);
                 return forReturn;
             }
