@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasandraApp", "CasandraApp\CasandraApp.csproj", "{452B43D8-9FAE-48E4-8DD6-7B72A48293F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadData", "ReadData\ReadData.csproj", "{1BEBDDB0-E391-4AE5-AF32-F431501504DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{452B43D8-9FAE-48E4-8DD6-7B72A48293F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{452B43D8-9FAE-48E4-8DD6-7B72A48293F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{452B43D8-9FAE-48E4-8DD6-7B72A48293F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BEBDDB0-E391-4AE5-AF32-F431501504DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BEBDDB0-E391-4AE5-AF32-F431501504DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BEBDDB0-E391-4AE5-AF32-F431501504DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BEBDDB0-E391-4AE5-AF32-F431501504DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
