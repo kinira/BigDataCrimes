@@ -154,5 +154,14 @@ namespace Crimes.Processing
 
             return res;
         }
+
+        public async Task<IEnumerable<CaseSimple>> GetCrimesOneMonthBack(int year)
+        {
+            var task = await dbProvider.ReadCrimesByYear(session, year);
+
+            var res = task.Where(x=>x.CrimeDate.Month == DateTime.Now.AddMonths(-1).Month));
+            
+            return res.Select(x => new CaseSimple() { Year = x.Year, Type = x.PrimaryType, X = x.X_Coordinate, Y = x.Y_Coordinate, Month = x.CrimeDate.Month });
+        }
     }
 }
