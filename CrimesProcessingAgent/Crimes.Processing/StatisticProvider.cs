@@ -7,11 +7,14 @@ using Cassandra;
 using Crimes.Cassandra;
 using System.Threading.Tasks;
 using Crimes.Processing.Predictions;
+using Crimes.Processing.Redis;
 
 namespace Crimes.Processing
 {
     public class StatisticProvider : IStatisticProvider, IDisposable
     {
+        private RedisManager rediesManager;
+
         IDbCassandraProvider dbProvider { get; set; }
 
         ISession session { get; set; }
@@ -20,6 +23,7 @@ namespace Crimes.Processing
         {
             this.dbProvider = new DbCassandraProvider();
             this.session = new SetUp().SetUpCassandra();
+            this.rediesManager = new RedisManager();
         }
 
         public IEnumerable<DistrictCrimes> CalculateAllCrimesByDistrcts(IEnumerable<CrimesDb> allCrimesByYears)
@@ -41,21 +45,32 @@ namespace Crimes.Processing
 
         public async Task<IEnumerable<DistrictCrimes>> CalculateAllCrimesInDisctrictsByYear(int year)
         {
-            var allCrimesByYear = await dbProvider.ReadCrimesByYear(session, year);
-
-            var crimessummary = new Dictionary<(int, string), int>();
-            foreach (var crime in allCrimesByYear)
+            var dataFromRedis = rediesManager.HasCrimes(year.ToString());
+            if (dataFromRedis != null)
             {
-                var currentKey = (crime.District, crime.PrimaryType);
-
-                if (!crimessummary.ContainsKey(currentKey))
-                    crimessummary.Add(currentKey, 1);
-                else
-                    crimessummary[currentKey]++;
+                return dataFromRedis;
             }
+            else
+            {
 
 
-            return crimessummary.Select(kvp => new DistrictCrimes { District = kvp.Key.Item1, CrimeType = kvp.Key.Item2, CrimAvg = kvp.Value });
+                var allCrimesByYear = await dbProvider.ReadCrimesByYear(session, year);
+
+                var crimessummary = new Dictionary<(int, string), int>();
+                foreach (var crime in allCrimesByYear)
+                {
+                    var currentKey = (crime.District, crime.PrimaryType);
+
+                    if (!crimessummary.ContainsKey(currentKey))
+                        crimessummary.Add(currentKey, 1);
+                    else
+                        crimessummary[currentKey]++;
+                }
+
+                var res = crimessummary.Select(kvp => new DistrictCrimes { District = kvp.Key.Item1, CrimeType = kvp.Key.Item2, CrimAvg = kvp.Value });
+                rediesManager.InsertCrimes(year, res);
+                return res;
+            }
         }
 
 
@@ -150,18 +165,33 @@ namespace Crimes.Processing
 
         public async Task<IEnumerable<CaseSimple>> CalculateAllCrimesByDistrctsByYear(int year)
         {
-            var task = await dbProvider.ReadCrimesByYear(session, year);
+            var dataFromRedis = rediesManager.HasCaseSimple(year.ToString());
+            if (dataFromRedis != null)
+            {
+                return dataFromRedis;
+            }
+            else
+            {
+                var task = await dbProvider.ReadCrimesByYear(session, year);
             var res = task.Select(CaseSimple.FromDbModel);
-            return res;
+                rediesManager.InsertCaseSimple(year, res);
+                return res;
+            }
         }
 
         public async Task<IEnumerable<CaseSimple>> GetCrimesOneMonthBack()
         {
             var localMonthBack = new LocalDate(DateTime.Now.Year, DateTime.Now.Month - 1, DateTime.Now.Day);
 
-            var task = await dbProvider.ReadCrimesByYear(session, DateTime.Now.Year);
+                return dataFromRedis;
+            else
+            {
+                var task = await dbProvider.ReadCrimesByYear(session, DateTime.Now.Year);
             var res = task.Where(x => x.CrimeDate > localMonthBack);
             return res.Select(CaseSimple.FromDbModel);
+                rediesManager.InsertCaseSimple(DateTime.Now.Year, forReturn);
+                return forReturn;
+            }
         }
 
         public void Dispose()
